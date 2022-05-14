@@ -12,24 +12,24 @@ export class FetchData extends Component {
     this.populateWeatherData();
   }
 
-  static renderForecastsTable(forecasts) {
+  static renderForecastsTable(cars) {
     return (
       <table className='table table-striped' aria-labelledby="tabelLabel">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Color</th>
+            <th>Price</th>
           </tr>
         </thead>
         <tbody>
-          {forecasts.map(forecast =>
-            <tr key={forecast.date}>
-              <td>{forecast.date}</td>
-              <td>{forecast.temperatureC}</td>
-              <td>{forecast.temperatureF}</td>
-              <td>{forecast.summary}</td>
+          {cars.map(car =>
+            <tr key={car.carKey}>
+              <td>{car.brand}</td>
+              <td>{car.model}</td>
+              <td>{car.color}</td>
+              <td>{car.price}</td>
             </tr>
           )}
         </tbody>
@@ -40,7 +40,7 @@ export class FetchData extends Component {
   render() {
     let contents = this.state.loading
       ? <p><em>Loading...</em></p>
-      : FetchData.renderForecastsTable(this.state.forecasts);
+      : FetchData.renderForecastsTable(this.state.cars);
 
     return (
       <div>
@@ -52,8 +52,8 @@ export class FetchData extends Component {
   }
 
   async populateWeatherData() {
-    const response = await fetch('weatherforecast');
+    const response = await fetch('cars');
     const data = await response.json();
-    this.setState({ forecasts: data, loading: false });
+    this.setState({ cars: data, loading: false });
   }
 }

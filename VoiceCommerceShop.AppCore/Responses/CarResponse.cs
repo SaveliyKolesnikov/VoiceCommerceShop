@@ -1,3 +1,3 @@
 ﻿namespace VoiceCommerceShop.AppCore.Responses;
 
-public record CarResponse(string Brand, string Model, string Color, double Price);
+public record CarResponse(Guid CarKey, string Brand, string Model, string Color, double Price);
