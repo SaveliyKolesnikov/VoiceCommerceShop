@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VoiceCommerceShop.Domain\VoiceCommerceShop.Domain.csproj" />
-    <ProjectReference Include="..\VoiceCommerceShop\Shared\VoiceCommerceShop.Shared.csproj" />
   </ItemGroup>
 
 </Project>

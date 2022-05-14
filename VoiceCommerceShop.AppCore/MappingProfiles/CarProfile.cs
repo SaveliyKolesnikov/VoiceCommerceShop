@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using VoiceCommerceShop.AppCore.Responses;
 using VoiceCommerceShop.Domain;
-using VoiceCommerceShop.Shared.Responses;
 
 namespace VoiceCommerceShop.AppCore.MappingProfiles;
 

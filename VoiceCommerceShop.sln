@@ -5,10 +5,6 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoiceCommerceShop.Server", "VoiceCommerceShop\Server\VoiceCommerceShop.Server.csproj", "{987E76E0-FCB9-451E-8E8B-1BAFF2829A6B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoiceCommerceShop.Client", "VoiceCommerceShop\Client\VoiceCommerceShop.Client.csproj", "{090609D2-6EC0-4F62-99AC-33FC23CF4D15}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoiceCommerceShop.Shared", "VoiceCommerceShop\Shared\VoiceCommerceShop.Shared.csproj", "{ACDE0301-3CED-42AD-93C2-78ED19911F59}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoiceCommerceShop.Domain", "VoiceCommerceShop.Domain\VoiceCommerceShop.Domain.csproj", "{21CC32DD-EB3F-42FF-A2BE-491373AB2C27}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoiceCommerceShop.DAL", "VoiceCommerceShop.DAL\VoiceCommerceShop.DAL.csproj", "{62297431-635E-4E3D-8D2B-3DA1813F8489}"
@@ -25,14 +21,6 @@ Global
 		{987E76E0-FCB9-451E-8E8B-1BAFF2829A6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{987E76E0-FCB9-451E-8E8B-1BAFF2829A6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{987E76E0-FCB9-451E-8E8B-1BAFF2829A6B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{090609D2-6EC0-4F62-99AC-33FC23CF4D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{090609D2-6EC0-4F62-99AC-33FC23CF4D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{090609D2-6EC0-4F62-99AC-33FC23CF4D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{090609D2-6EC0-4F62-99AC-33FC23CF4D15}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ACDE0301-3CED-42AD-93C2-78ED19911F59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ACDE0301-3CED-42AD-93C2-78ED19911F59}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ACDE0301-3CED-42AD-93C2-78ED19911F59}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ACDE0301-3CED-42AD-93C2-78ED19911F59}.Release|Any CPU.Build.0 = Release|Any CPU
 		{21CC32DD-EB3F-42FF-A2BE-491373AB2C27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{21CC32DD-EB3F-42FF-A2BE-491373AB2C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21CC32DD-EB3F-42FF-A2BE-491373AB2C27}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -1,8 +1,8 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using VoiceCommerceShop.AppCore.Responses;
 using VoiceCommerceShop.DAL;
-using VoiceCommerceShop.Shared.Responses;
 
 namespace VoiceCommerceShop.Server.Controllers
 {
