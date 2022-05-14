@@ -8,16 +8,8 @@ namespace VoiceCommerceShop.DAL;
 
 public class DataContext : DbContext
 {
-    private readonly IConfiguration configuration;
-
-    public DataContext(IConfiguration configuration)
+    public DataContext(DbContextOptions<DataContext> configuration) : base(configuration)
     {
-        this.configuration = configuration;
-    }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-    {
-        options.UseSqlServer(configuration.GetConnectionString("WebApiDatabase"));
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
