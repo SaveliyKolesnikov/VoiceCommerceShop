@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.ResponseCompression;
+using VoiceCommerceShop.AppCore.DI;
 using VoiceCommerceShop.DAL.DI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ builder.Configuration
     .AddJsonFile("appsettings.development.json");
 
 builder.Services.AddDal(builder.Configuration);
+builder.Services.AddAppCore();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 

@@ -1,5 +1,6 @@
 ﻿@page "/fetchdata"
 @using VoiceCommerceShop.Shared
+@using VoiceCommerceShop.Shared.Responses
 @inject HttpClient Http
 
 <PageTitle>Weather forecast</PageTitle>
@@ -17,20 +18,20 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Color</th>
+                <th>Price</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var forecast in forecasts)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@forecast.Brand</td>
+                    <td>@forecast.Model</td>
+                    <td>@forecast.Color</td>
+                    <td>@forecast.Price</td>
                 </tr>
             }
         </tbody>
@@ -38,10 +39,10 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    private IEnumerable<CarResponse>? forecasts;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+        forecasts = await Http.GetFromJsonAsync<IEnumerable<CarResponse>>("Cars");
     }
 }

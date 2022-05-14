@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\VoiceCommerceShop.AppCore\VoiceCommerceShop.AppCore.csproj" />
     <ProjectReference Include="..\..\VoiceCommerceShop.DAL\VoiceCommerceShop.DAL.csproj" />
     <ProjectReference Include="..\Client\VoiceCommerceShop.Client.csproj" />
     <ProjectReference Include="..\Shared\VoiceCommerceShop.Shared.csproj" />
