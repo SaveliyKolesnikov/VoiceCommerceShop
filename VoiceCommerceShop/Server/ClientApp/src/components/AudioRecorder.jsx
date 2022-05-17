@@ -17,7 +17,7 @@ function _audioRecorder({ onRecordingFinished }) {
     }
 
     setIsRecording(!isRecording)
-  }, [isRecording]);
+  }, [isRecording, onRecordingFinished]);
 
   return (
     <span onClick={onRecorderClick} style={{ cursor: "pointer" }}>
