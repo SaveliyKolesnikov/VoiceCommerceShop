@@ -12,7 +12,6 @@ var configuration = builder.Configuration;
 // Add services to the container.
 configuration
     .AddJsonFile("appsettings.json")
-    .AddJsonFile("appsettings.development.json")
     .AddUserSecrets(typeof(Program).Assembly);
 
 serviceCollection.AddSingleton(configuration.GetSection("SpeechServiceSettings").Get<SpeechServiceSettings>());
