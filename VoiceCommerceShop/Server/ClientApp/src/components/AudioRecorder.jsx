@@ -20,7 +20,7 @@ function _audioRecorder({ onRecordingFinished }) {
   }, [isRecording]);
 
   return (
-    <span onClick={onRecorderClick}>
+    <span onClick={onRecorderClick} style={{ cursor: "pointer" }}>
       {isRecording ? <AiFillAudio size={iconsSize} /> : <AiOutlineAudio size={iconsSize} />}
     </span>
   );

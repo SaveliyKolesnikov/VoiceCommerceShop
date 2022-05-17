@@ -10,7 +10,7 @@ export class FetchData extends Component {
   }
 
   componentDidMount() {
-    this.populateWeatherData();
+    this.populateCarsData();
   }
 
   onRecordingFinished = async (blob) => {
@@ -37,11 +37,9 @@ export class FetchData extends Component {
     return await res.text();
   }
 
-  renderForecastsTable = (cars) => {
+  renderCarsTable = (cars) => {
     return (
       <>
-        <span>Search query: {this.state.searchQuery || "---"}</span>
-        <AudioRecorder onRecordingFinished={this.onRecordingFinished}></AudioRecorder>
         <table className='table table-striped' aria-labelledby="tabelLabel">
           <thead>
             <tr>
@@ -69,18 +67,26 @@ export class FetchData extends Component {
   render() {
     let contents = this.state.loading
       ? <p><em>Loading...</em></p>
-      : this.renderForecastsTable(this.state.cars);
+      : this.renderCarsTable(this.state.cars);
 
     return (
       <div>
-        <h1 id="tabelLabel" >Weather forecast</h1>
-        <p>This component demonstrates fetching data from the server.</p>
+        <h1 id="tabelLabel" >Car distributor</h1>
+        <p>This component demonstrates AI voice search capabilities.</p>
+        <span style={{ marginRight: "10px" }}>
+          Search query:&nbsp; 
+          {
+            this.state.searchQuery ||
+            <span style={{ color: "gray" }}>Click on microphone to say search parameters. Click second time to search.</span>
+          }
+        </span>
+        <AudioRecorder onRecordingFinished={this.onRecordingFinished}></AudioRecorder>
         {contents}
       </div>
     );
   }
 
-  async populateWeatherData() {
+  async populateCarsData() {
     const response = await fetch('cars');
     const data = await response.json();
     this.setState({ cars: data, loading: false });
