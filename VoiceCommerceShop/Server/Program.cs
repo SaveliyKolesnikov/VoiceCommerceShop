@@ -1,17 +1,26 @@
-using Microsoft.AspNetCore.ResponseCompression;
+using System.Reflection;
 using VoiceCommerceShop.AppCore.DI;
+using VoiceCommerceShop.CognitiveServices.Speech;
 using VoiceCommerceShop.DAL.DI;
+using VoiceCommerceShop.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Configuration
-    .AddJsonFile("appsettings.json")
-    .AddJsonFile("appsettings.development.json");
+var serviceCollection = builder.Services;
+var configuration = builder.Configuration;
 
-builder.Services.AddDal(builder.Configuration);
-builder.Services.AddAppCore();
-builder.Services.AddControllersWithViews();
+// Add services to the container.
+configuration
+    .AddJsonFile("appsettings.json")
+    .AddJsonFile("appsettings.development.json")
+    .AddUserSecrets(typeof(Program).Assembly);
+
+serviceCollection.AddSingleton(configuration.GetSection("SpeechServiceSettings").Get<SpeechServiceSettings>());
+serviceCollection.AddSingleton<ISpeechRecognizerService, SpeechRecognizerService>();
+
+serviceCollection.AddDal(configuration);
+serviceCollection.AddAppCore();
+serviceCollection.AddControllersWithViews();
 
 var app = builder.Build();
 

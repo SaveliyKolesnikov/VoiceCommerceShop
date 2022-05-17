@@ -11,6 +11,7 @@
 		<SpaProxyServerUrl>https://localhost:44475</SpaProxyServerUrl>
 		<SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>94cecfc9-ac2b-44eb-8867-c108bddc0849</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -19,7 +20,9 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\VoiceCommerceShop.AppCore\VoiceCommerceShop.AppCore.csproj" />
+		<ProjectReference Include="..\..\VoiceCommerceShop.CognitiveServices.Speech\VoiceCommerceShop.CognitiveServices.Speech.csproj" />
 		<ProjectReference Include="..\..\VoiceCommerceShop.DAL\VoiceCommerceShop.DAL.csproj" />
+		<ProjectReference Include="..\..\VoiceCommerceShop.Shared\VoiceCommerceShop.Shared.csproj" />
 	</ItemGroup>
 
 

@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoiceCommerceShop.Domain", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoiceCommerceShop.DAL", "VoiceCommerceShop.DAL\VoiceCommerceShop.DAL.csproj", "{62297431-635E-4E3D-8D2B-3DA1813F8489}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceCommerceShop.AppCore", "VoiceCommerceShop.AppCore\VoiceCommerceShop.AppCore.csproj", "{9D709AFD-F8A9-4EA9-94FA-62CF388F2EF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoiceCommerceShop.AppCore", "VoiceCommerceShop.AppCore\VoiceCommerceShop.AppCore.csproj", "{9D709AFD-F8A9-4EA9-94FA-62CF388F2EF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceCommerceShop.CognitiveServices.Speech", "VoiceCommerceShop.CognitiveServices.Speech\VoiceCommerceShop.CognitiveServices.Speech.csproj", "{977533C9-8E58-48A1-879B-4C4996663E57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceCommerceShop.Shared", "VoiceCommerceShop.Shared\VoiceCommerceShop.Shared.csproj", "{84E783E4-0F70-498B-931F-DE2DABF549E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{9D709AFD-F8A9-4EA9-94FA-62CF388F2EF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D709AFD-F8A9-4EA9-94FA-62CF388F2EF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D709AFD-F8A9-4EA9-94FA-62CF388F2EF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{977533C9-8E58-48A1-879B-4C4996663E57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{977533C9-8E58-48A1-879B-4C4996663E57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{977533C9-8E58-48A1-879B-4C4996663E57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{977533C9-8E58-48A1-879B-4C4996663E57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84E783E4-0F70-498B-931F-DE2DABF549E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84E783E4-0F70-498B-931F-DE2DABF549E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84E783E4-0F70-498B-931F-DE2DABF549E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84E783E4-0F70-498B-931F-DE2DABF549E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
