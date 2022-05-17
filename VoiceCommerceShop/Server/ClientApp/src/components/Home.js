@@ -1,26 +1,94 @@
 import React, { Component } from 'react';
+import { AudioRecorder } from './AudioRecorder.jsx'
 
 export class Home extends Component {
   static displayName = Home.name;
 
-  render () {
+  constructor(props) {
+    super(props);
+    this.state = { cars: [], loading: true, searchQuery: "" };
+  }
+
+  componentDidMount() {
+    this.populateCarsData();
+  }
+
+  onRecordingFinished = async (blob) => {
+    const searchRequestText = await this.sendAudioRequest(blob);
+    this.setState({ searchQuery: searchRequestText }, () => {
+      this.queryFilteredCars(searchRequestText);
+    });
+  }
+
+  queryFilteredCars = async (searchRequestText) => {
+    this.setState({ loading: true });
+    const filteredCarsResponse = await fetch(`/cars/filter-by-text?inputText=${searchRequestText}`);
+    const filteredCars = await filteredCarsResponse.json();
+    this.setState({ cars: filteredCars, loading: false });
+  }
+
+  sendAudioRequest = async (blob) => {
+    const formData = new FormData();
+    formData.append("audio", blob, "test.wav");
+    const res = await fetch('/cars/voice-search', {
+      method: "POST",
+      body: formData
+    });
+    return await res.text();
+  }
+
+  renderCarsTable = (cars) => {
+    return (
+      <>
+        <table className='table table-striped' aria-labelledby="tabelLabel">
+          <thead>
+            <tr>
+              <th>Brand</th>
+              <th>Model</th>
+              <th>Color</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cars?.map(car =>
+              <tr key={car.carKey}>
+                <td>{car.brand}</td>
+                <td>{car.model}</td>
+                <td>{car.color}</td>
+                <td>{car.price}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </>
+    );
+  }
+
+  render() {
+    let contents = this.state.loading
+      ? <p><em>Loading...</em></p>
+      : this.renderCarsTable(this.state.cars);
+
     return (
       <div>
-        <h1>Hello, world!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
-        <ul>
-          <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-          <li><a href='https://facebook.github.io/react/'>React</a> for client-side code</li>
-          <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-        </ul>
-        <p>To help you get started, we have also set up:</p>
-        <ul>
-          <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-          <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-          <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-        </ul>
-        <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
+        <h1 id="tabelLabel" >Voice managed car distributor</h1>
+        <p>This component demonstrates AI voice search capabilities.</p>
+        <span style={{ marginRight: "10px" }}>
+          Search query:&nbsp; 
+          {
+            this.state.searchQuery ||
+            <span style={{ color: "gray" }}>Click on microphone icon to say search parameters. Click second time to search.</span>
+          }
+        </span>
+        <AudioRecorder onRecordingFinished={this.onRecordingFinished}></AudioRecorder>
+        {contents}
       </div>
     );
+  }
+
+  async populateCarsData() {
+    const response = await fetch('cars');
+    const data = await response.json();
+    this.setState({ cars: data, loading: false });
   }
 }
