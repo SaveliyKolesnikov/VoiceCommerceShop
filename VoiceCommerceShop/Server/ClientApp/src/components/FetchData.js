@@ -1,46 +1,66 @@
 import React, { Component } from 'react';
+import { AudioRecorder } from './AudioRecorder.jsx'
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
 
   constructor(props) {
     super(props);
-    this.state = { forecasts: [], loading: true };
+    this.state = { forecasts: [], loading: true, searchQuery: "" };
   }
 
   componentDidMount() {
     this.populateWeatherData();
   }
 
-  static renderForecastsTable(cars) {
+  onRecordingFinished = async (blob) => {
+    const recognizedText = await this.sendAudioRequest(blob);
+    this.setState({ searchQuery: recognizedText });
+  }
+
+  sendAudioRequest = async (blob) => {
+    const formData = new FormData();
+    formData.append("audio", blob, "test.wav");
+    const res = await fetch('/cars/voice-search', {
+      method: "POST",
+      body: formData
+    });
+    return await res.text();
+  }
+
+  renderForecastsTable = (cars) => {
     return (
-      <table className='table table-striped' aria-labelledby="tabelLabel">
-        <thead>
-          <tr>
-            <th>Brand</th>
-            <th>Model</th>
-            <th>Color</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cars.map(car =>
-            <tr key={car.carKey}>
-              <td>{car.brand}</td>
-              <td>{car.model}</td>
-              <td>{car.color}</td>
-              <td>{car.price}</td>
+      <>
+        <span>Search query: {this.state.searchQuery || "---"}</span>
+        <AudioRecorder onRecordingFinished={this.onRecordingFinished}></AudioRecorder>
+        <table className='table table-striped' aria-labelledby="tabelLabel">
+          <thead>
+            <tr>
+              <th>Brand</th>
+              <th>Model</th>
+              <th>Color</th>
+              <th>Price</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {cars.map(car =>
+              <tr key={car.carKey}>
+                <td>{car.brand}</td>
+                <td>{car.model}</td>
+                <td>{car.color}</td>
+                <td>{car.price}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </>
     );
   }
 
   render() {
     let contents = this.state.loading
       ? <p><em>Loading...</em></p>
-      : FetchData.renderForecastsTable(this.state.cars);
+      : this.renderForecastsTable(this.state.cars);
 
     return (
       <div>
