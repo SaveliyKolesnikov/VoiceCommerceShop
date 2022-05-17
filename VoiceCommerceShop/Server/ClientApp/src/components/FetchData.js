@@ -6,7 +6,7 @@ export class FetchData extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { forecasts: [], loading: true, searchQuery: "" };
+    this.state = { cars: [], loading: true, searchQuery: "" };
   }
 
   componentDidMount() {
@@ -14,8 +14,17 @@ export class FetchData extends Component {
   }
 
   onRecordingFinished = async (blob) => {
-    const recognizedText = await this.sendAudioRequest(blob);
-    this.setState({ searchQuery: recognizedText });
+    const searchRequestText = await this.sendAudioRequest(blob);
+    this.setState({ searchQuery: searchRequestText }, () => {
+      this.queryFilteredCars(searchRequestText);
+    });
+  }
+
+  queryFilteredCars = async (searchRequestText) => {
+    this.setState({ loading: true });
+    const filteredCarsResponse = await fetch(`/cars/filter-by-text?inputText=${searchRequestText}`);
+    const filteredCars = await filteredCarsResponse.json();
+    this.setState({ cars: filteredCars, loading: false });
   }
 
   sendAudioRequest = async (blob) => {
@@ -43,7 +52,7 @@ export class FetchData extends Component {
             </tr>
           </thead>
           <tbody>
-            {cars.map(car =>
+            {cars?.map(car =>
               <tr key={car.carKey}>
                 <td>{car.brand}</td>
                 <td>{car.model}</td>

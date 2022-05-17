@@ -51,15 +51,15 @@ namespace VoiceCommerceShop.Server.Controllers
         }
 
 
-        [HttpPost("filter-by-text")]
-        public async Task<ActionResult<Car[]>> VoiceSearch([FromQuery] string inputText)
+        [HttpGet("filter-by-text")]
+        public async Task<ActionResult<Car[]>> FilterByText([FromQuery] string inputText)
         {
             var (brand, model, color) = await queryRequestAnalyzer.ParseUserSearchIntents(inputText);
 
             var filteredCars = await context.Cars.Where(c =>
-                c.Brand.Contains(brand, StringComparison.InvariantCultureIgnoreCase) &&
-                c.Model.Contains(model, StringComparison.InvariantCultureIgnoreCase) &&
-                c.Color.Contains(color, StringComparison.InvariantCultureIgnoreCase)).ToArrayAsync();
+                c.Brand.Contains(brand) &&
+                c.Model.Contains(model) &&
+                c.Color.Contains(color)).ToArrayAsync();
 
             return Ok(filteredCars);
 
