@@ -1,13 +1,11 @@
-using System.Diagnostics;
-using System.Net;
-using System.Runtime.CompilerServices;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CognitiveServices.Speech.Audio;
 using Microsoft.EntityFrameworkCore;
+using VoiceCommerceShop.AI.Luis.Interfaces;
 using VoiceCommerceShop.AppCore.Responses;
 using VoiceCommerceShop.CognitiveServices.Speech;
 using VoiceCommerceShop.DAL;
+using VoiceCommerceShop.Domain;
 
 namespace VoiceCommerceShop.Server.Controllers
 {
@@ -17,15 +15,17 @@ namespace VoiceCommerceShop.Server.Controllers
     {
         private readonly DataContext context;
         private readonly IMapper mapper;
-        private readonly ILogger<CarsController> logger;
         private readonly ISpeechRecognizerService speechRecognizerService;
+        private readonly ICarQueryRequestAnalyzer queryRequestAnalyzer;
 
-        public CarsController(DataContext context, IMapper mapper, ILogger<CarsController> logger, ISpeechRecognizerService speechRecognizerService)
+        public CarsController(DataContext context, IMapper mapper,
+            ISpeechRecognizerService speechRecognizerService, 
+            ICarQueryRequestAnalyzer queryRequestAnalyzer)
         {
             this.context = context;
             this.mapper = mapper;
-            this.logger = logger;
             this.speechRecognizerService = speechRecognizerService;
+            this.queryRequestAnalyzer = queryRequestAnalyzer;
         }
 
         [HttpGet]
@@ -45,12 +45,24 @@ namespace VoiceCommerceShop.Server.Controllers
             await using var reader = formFiles[0].OpenReadStream();
             using var binaryStream = new BinaryReader(reader);
 
-            var res = await speechRecognizerService.RecognizeFromBinaryStream(binaryStream);
+            var userInputText = await speechRecognizerService.RecognizeFromBinaryStream(binaryStream);
+
+            return userInputText;
+        }
 
 
-            return Ok(res);
+        [HttpPost("filter-by-text")]
+        public async Task<ActionResult<Car[]>> VoiceSearch([FromQuery] string inputText)
+        {
+            var (brand, model, color) = await queryRequestAnalyzer.ParseUserSearchIntents(inputText);
+
+            var filteredCars = await context.Cars.Where(c =>
+                c.Brand.Contains(brand, StringComparison.InvariantCultureIgnoreCase) &&
+                c.Model.Contains(model, StringComparison.InvariantCultureIgnoreCase) &&
+                c.Color.Contains(color, StringComparison.InvariantCultureIgnoreCase)).ToArrayAsync();
+
+            return Ok(filteredCars);
+
         }
     }
-
-    public record Data(IFormFile audio);
 }

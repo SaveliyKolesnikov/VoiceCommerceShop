@@ -1,5 +1,5 @@
 ﻿using Microsoft.CognitiveServices.Speech;
-using VoiceCommerceShop.Shared;
+using VoiceCommerceShop.CognitiveServices.Speech.Config;
 
 namespace VoiceCommerceShop.CognitiveServices.Speech;
 

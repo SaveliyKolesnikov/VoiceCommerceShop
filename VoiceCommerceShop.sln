@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoiceCommerceShop.AppCore",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceCommerceShop.CognitiveServices.Speech", "VoiceCommerceShop.CognitiveServices.Speech\VoiceCommerceShop.CognitiveServices.Speech.csproj", "{977533C9-8E58-48A1-879B-4C4996663E57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceCommerceShop.Shared", "VoiceCommerceShop.Shared\VoiceCommerceShop.Shared.csproj", "{84E783E4-0F70-498B-931F-DE2DABF549E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceCommerceShop.AI.Luis", "VoiceCommerceShop.AI.Luis\VoiceCommerceShop.AI.Luis.csproj", "{37A90383-4D8B-4B55-BEEC-CA3EC421E6C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{977533C9-8E58-48A1-879B-4C4996663E57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{977533C9-8E58-48A1-879B-4C4996663E57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{977533C9-8E58-48A1-879B-4C4996663E57}.Release|Any CPU.Build.0 = Release|Any CPU
-		{84E783E4-0F70-498B-931F-DE2DABF549E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84E783E4-0F70-498B-931F-DE2DABF549E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84E783E4-0F70-498B-931F-DE2DABF549E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84E783E4-0F70-498B-931F-DE2DABF549E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37A90383-4D8B-4B55-BEEC-CA3EC421E6C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37A90383-4D8B-4B55-BEEC-CA3EC421E6C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37A90383-4D8B-4B55-BEEC-CA3EC421E6C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37A90383-4D8B-4B55-BEEC-CA3EC421E6C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

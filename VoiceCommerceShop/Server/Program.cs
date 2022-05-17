@@ -1,8 +1,11 @@
 using System.Reflection;
+using VoiceCommerceShop.AI.Luis;
+using VoiceCommerceShop.AI.Luis.Config;
+using VoiceCommerceShop.AI.Luis.Interfaces;
 using VoiceCommerceShop.AppCore.DI;
 using VoiceCommerceShop.CognitiveServices.Speech;
+using VoiceCommerceShop.CognitiveServices.Speech.Config;
 using VoiceCommerceShop.DAL.DI;
-using VoiceCommerceShop.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,9 @@ configuration
 
 serviceCollection.AddSingleton(configuration.GetSection("SpeechServiceSettings").Get<SpeechServiceSettings>());
 serviceCollection.AddSingleton<ISpeechRecognizerService, SpeechRecognizerService>();
+
+serviceCollection.AddSingleton(configuration.GetSection("LuisServiceSettings").Get<LuisServiceSettings>());
+serviceCollection.AddSingleton<ICarQueryRequestAnalyzer, CarQueryRequestAnalyzer>();
 
 serviceCollection.AddDal(configuration);
 serviceCollection.AddAppCore();
