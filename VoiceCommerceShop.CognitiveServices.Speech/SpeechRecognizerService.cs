@@ -22,7 +22,7 @@ public class SpeechRecognizerService : ISpeechRecognizerService
 
         // Creates a speech recognizer using audio stream input.
         using var recognizer = new SpeechRecognizer(config, audioInput);
-        
+
         var res = await recognizer.RecognizeOnceAsync();
         return res.Text;
     }

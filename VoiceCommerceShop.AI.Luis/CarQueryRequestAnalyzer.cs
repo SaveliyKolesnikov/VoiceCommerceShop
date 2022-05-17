@@ -13,7 +13,6 @@ public class CarQueryRequestAnalyzer : ICarQueryRequestAnalyzer
     private const string BrandEntityName = "Brand";
     private const string ModelEntityName = "Model";
     private const string ColorEntityName = "Color";
-    private static CarFiltersDto DefaultFilterValue => new(string.Empty, string.Empty, string.Empty);
 
     private readonly LuisServiceSettings settings;
 
@@ -22,11 +21,13 @@ public class CarQueryRequestAnalyzer : ICarQueryRequestAnalyzer
         this.settings = settings;
     }
 
+    private static CarFiltersDto DefaultFilterValue => new(string.Empty, string.Empty, string.Empty);
+
     public async Task<CarFiltersDto> ParseUserSearchIntents(string userRequestText)
     {
         var credentials = new ApiKeyServiceClientCredentials(settings.SubscriptionKey);
         var runtimeClient = new LUISRuntimeClient(credentials) { Endpoint = settings.PredictionEndpoint };
-        
+
         var request = new PredictionRequest { Query = userRequestText };
         var prediction = await runtimeClient.Prediction.GetSlotPredictionAsync(Guid.Parse(settings.AppId), settings.SlotName, request);
 
@@ -40,10 +41,7 @@ public class CarQueryRequestAnalyzer : ICarQueryRequestAnalyzer
 
         var carSearchParams = carSearchEntities.Children().FirstOrDefault();
 
-        if (carSearchParams is null)
-        {
-            return DefaultFilterValue;
-        }
+        if (carSearchParams is null) return DefaultFilterValue;
 
         static string TryGetOrDefault(JToken entities, string path) => entities.SelectToken(path)?.First()?.Value<string>() ?? string.Empty;
 

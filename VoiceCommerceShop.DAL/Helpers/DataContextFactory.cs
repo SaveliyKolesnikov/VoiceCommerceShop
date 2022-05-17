@@ -5,10 +5,6 @@ namespace VoiceCommerceShop.DAL.Helpers;
 
 public class MyContextFactory : IDesignTimeDbContextFactory<DataContext>
 {
-    public MyContextFactory()
-    {
-    }
-
     public DataContext CreateDbContext(string[] args)
     {
         var builder = new DbContextOptionsBuilder<DataContext>();
