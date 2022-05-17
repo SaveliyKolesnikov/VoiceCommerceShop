@@ -21,8 +21,6 @@ public class CarQueryRequestAnalyzer : ICarQueryRequestAnalyzer
         this.settings = settings;
     }
 
-    private static CarFiltersDto DefaultFilterValue => new(string.Empty, string.Empty, string.Empty);
-
     public async Task<CarFiltersDto> ParseUserSearchIntents(string userRequestText)
     {
         var credentials = new ApiKeyServiceClientCredentials(settings.SubscriptionKey);
@@ -36,12 +34,12 @@ public class CarQueryRequestAnalyzer : ICarQueryRequestAnalyzer
         if (!entities.TryGetValue(CarSearchEntityName, out var carSearchEntity) ||
             carSearchEntity is not JToken carSearchEntities)
         {
-            return DefaultFilterValue;
+            return CarFiltersDto.Default;
         }
 
         var carSearchParams = carSearchEntities.Children().FirstOrDefault();
 
-        if (carSearchParams is null) return DefaultFilterValue;
+        if (carSearchParams is null) return CarFiltersDto.Default;
 
         static string TryGetOrDefault(JToken entities, string path) => entities.SelectToken(path)?.First()?.Value<string>() ?? string.Empty;
 
